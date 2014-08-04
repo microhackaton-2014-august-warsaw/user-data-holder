@@ -41,6 +41,7 @@ ext {
     jacksonMapper = '1.9.13'
     aspectjVersion = '1.8.1'
     microDepsVersion = '0.3.1'
+    hibernateVersion = '4.3.1.Final'
 
     stubRepositoryUrl = '' //TODO: fill this in
     zookeeperPort = 2181
@@ -80,6 +81,7 @@ configurations {
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     compile "org.codehaus.groovy:groovy-all:$groovyVersion:indy"
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.1.1'
     compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonMapper"
@@ -91,6 +93,8 @@ dependencies {
     compile 'org.yaml:snakeyaml:1.13'
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'org.hibernate:hibernate-validator:5.1.1.Final'
+    compile "org.hibernate:hibernate-core:$hibernateVersion"
+    compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
     compile "org.aspectj:aspectjrt:$aspectjVersion"
     compile("com.ofg:micro-deps-spring-config:0.0.2") {
         exclude group: 'org.slf4j'
@@ -98,6 +102,8 @@ dependencies {
     }
     compile 'org.apache.ivy:ivy:2.3.0'
     compile "com.mangofactory:swagger-springmvc:0.8.4"
+
+    compile 'com.h2database:h2:1.4.179'
 
     runtime "cglib:cglib-nodep:3.1"
     runtime "org.objenesis:objenesis:2.1" // allows mocking of classes without default constructor (together with CGLIB)

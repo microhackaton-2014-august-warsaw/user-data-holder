@@ -1,6 +1,5 @@
 language: groovy
 jdk:
-- oraclejdk7
 - oraclejdk8
 
 install:
@@ -17,4 +16,5 @@ env:
 - TERM=dumb
 
 after_success:
+- ./gradlew build uploadArchives -PbuildNr=$TRAVIS_BUILD_NUMBER --info --stacktrace
 - ./gradlew test jacocoTestReport coveralls -Pcoverage

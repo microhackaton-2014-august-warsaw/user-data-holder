@@ -1,6 +1,6 @@
 {
     "pl": {
-        "this": "com/ofg/CHANGETHIS",
+        "this": "pl/microhackaton/user-data-holder",
         "dependencies": {
 
         }

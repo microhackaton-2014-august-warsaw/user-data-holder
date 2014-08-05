@@ -24,13 +24,12 @@ ext.currentVersion = "${versionPrefix}-${buildNrLoc}"
 
 uploadArchives {
     repositories.mavenDeployer {
-        repository(url: "http://nexus.4finance.net/content/repositories/Pipeline") {
-            //TODO: fill this in
-            authentication(userName: '', password: '')
+        repository(url: "http://nexus.microhackathon.pl/content/repositories/releases/") {
+            authentication(userName: 'deployment', password: 'deployment123')
         }
         pom.version = "${currentVersion}"
-        pom.artifactId = "" //TODO: fill this in
-        pom.groupId = "com.ofg"
+        pom.artifactId = "user-data-holder"
+        pom.groupId = "pl.microhackaton"
     }
 }
 

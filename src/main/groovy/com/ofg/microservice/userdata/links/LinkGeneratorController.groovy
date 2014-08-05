@@ -35,6 +35,6 @@ class LinkGeneratorController {
 
         log.info("persisted ${link}")
 
-        return new ResponseEntity('http://domain:port/' + link.id, HttpStatus.OK)
+        return new ResponseEntity(link.id, HttpStatus.OK)
     }
 }

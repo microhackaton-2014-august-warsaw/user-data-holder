@@ -4,3 +4,6 @@ user-data-holder
 =================
 
 Microservice that stores data collected when generating a link for youshouldrememberme
+
+API
+---

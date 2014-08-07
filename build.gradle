@@ -8,7 +8,9 @@ buildscript {
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.1.4.RELEASE'
         classpath 'com.ofg:uptodate-gradle-plugin:0.0.5'
-        if(project.hasProperty("coverage")) { classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2' }
+        if (project.hasProperty("coverage")) {
+            classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2'
+        }
     }
 }
 
@@ -118,7 +120,7 @@ dependencies {
         exclude group: 'org.slf4j'
         exclude group: 'log4j'
     }
-    
+
     mockDependencies 'com.ofg:micro-deps:0.5.0:fatJar'
 }
 
@@ -130,7 +132,7 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
 
-if(project.hasProperty("coverage")) {
+if (project.hasProperty("coverage")) {
     apply plugin: 'codenarc'
     apply plugin: 'jacoco'
     apply plugin: 'sonar-runner'
@@ -155,11 +157,11 @@ if(project.hasProperty("coverage")) {
         reportFormat = 'xml'
         ignoreFailures = true
     }
-    
+
     dependencies {
         codenarc 'org.codenarc:CodeNarc:0.21'
     }
-    
+
     test {
         ignoreFailures = true
         jacoco {
@@ -186,4 +188,9 @@ task runMocks << {
 
 task stopMocks << {
     "http://localhost:$zookeeperMockPort/stop".toURL().readLines()
+}
+
+test {
+    //Workaround for the issue with Java 8u11 and 7u65 - http://www.infoq.com/news/2014/08/Java8-U11-Broke-Tools
+    jvmArgs '-noverify'
 }

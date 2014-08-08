@@ -6,6 +6,7 @@ import groovy.transform.TypeChecked
 @TypeChecked
 @Canonical
 class NewLinkRequest {
+    String name
     String twitter
     String facebook
     String googleplus

@@ -39,8 +39,11 @@ class UserLink {
     @Column(name = "NAME")
     String name
 
+    @Column(name = "RSS")
+    String rss
+
     static UserLink fromLinkRequest(NewLinkRequest linkRequest) {
         return new UserLink(id: UUID.randomUUID().toString(), facebook: linkRequest.facebook, twitter: linkRequest.twitter,
-        googleplus: linkRequest.googleplus, name: linkRequest.name)
+        googleplus: linkRequest.googleplus, name: linkRequest.name, rss: linkRequest.rss)
     }
 }

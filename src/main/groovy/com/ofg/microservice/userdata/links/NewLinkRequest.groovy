@@ -10,4 +10,5 @@ class NewLinkRequest {
     String twitter
     String facebook
     String googleplus
+    String rss
 }

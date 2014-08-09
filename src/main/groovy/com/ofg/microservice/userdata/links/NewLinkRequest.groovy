@@ -11,4 +11,5 @@ class NewLinkRequest {
     String facebook
     String googleplus
     String rss
+    String github
 }

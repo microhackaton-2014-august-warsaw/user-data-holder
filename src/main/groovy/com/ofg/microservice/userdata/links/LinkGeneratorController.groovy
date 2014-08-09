@@ -48,7 +48,7 @@ class LinkGeneratorController {
             consumes = UserDataHolderAPI.JSON_V1,
             produces = UserDataHolderAPI.JSON_V1)
     ResponseEntity<JsonStringWrapper> createPair(@RequestBody CreatePairRequest request) {
-        log.info("New link: $request")
+        log.info("New pair: $request")
 
         LoveConnection loveConnection = loveConnectionRepository.save(
                 new LoveConnection(

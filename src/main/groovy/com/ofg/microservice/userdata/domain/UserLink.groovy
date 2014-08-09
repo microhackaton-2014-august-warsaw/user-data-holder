@@ -25,7 +25,7 @@ class UserLink {
 
     @Version
     @Column(name = "ENTITY_VERSION", nullable = false)
-    Long version;
+    Long version
 
     @Column(name = "FACEBOOK")
     String facebook

@@ -1,6 +1,8 @@
 package com.ofg.microservice.userdata.links
 
 import com.ofg.microservice.userdata.domain.JsonStringWrapper
+import com.ofg.microservice.userdata.domain.LoveConnection
+import com.ofg.microservice.userdata.domain.LoveConnectionRepository
 import com.ofg.microservice.userdata.domain.UserLink
 import com.ofg.microservice.userdata.domain.UserLinkRepository
 import groovy.transform.TypeChecked
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController
 class LinkGeneratorController {
 
     private UserLinkRepository linkRepository
+    private LoveConnectionRepository loveConnectionRepository
 
     @Autowired
-    LinkGeneratorController(UserLinkRepository linkRepository) {
+    LinkGeneratorController(UserLinkRepository linkRepository, LoveConnectionRepository loveConnectionRepository) {
         this.linkRepository = linkRepository
+        this.loveConnectionRepository = loveConnectionRepository
     }
 
     @RequestMapping(method = RequestMethod.PUT,
@@ -39,6 +43,24 @@ class LinkGeneratorController {
 
         return new ResponseEntity(new JsonStringWrapper(link.id), HttpStatus.OK)
     }
+
+    @RequestMapping(value = '/pair', method = RequestMethod.PUT,
+            consumes = UserDataHolderAPI.JSON_V1,
+            produces = UserDataHolderAPI.JSON_V1)
+    ResponseEntity<JsonStringWrapper> createPair(@RequestBody CreatePairRequest request) {
+        log.info("New link: $request")
+
+        LoveConnection loveConnection = loveConnectionRepository.save(
+                new LoveConnection(
+                        id: UUID.randomUUID().toString(),
+                        celebrity: linkRepository.findOne(request.celebrityId),
+                        peasant: linkRepository.findOne(request.peasantId)))
+
+        log.info("persisted ${loveConnection}")
+
+        return new ResponseEntity(new JsonStringWrapper(loveConnection.id), HttpStatus.OK)
+    }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST,
             consumes = UserDataHolderAPI.JSON_V1,
